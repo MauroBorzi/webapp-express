@@ -6,12 +6,15 @@ const app = express()
 const port = process.env.PORT
 
 
-// importo il router
+// importo utility
 const movieRouter = require("./routers/movieRouter")
+const imgPathMiddleware = require("./middlewares/imgPathMiddleware")
 
 
 // middleware per l'utilizzo di IMG 
 app.use(express.static("public"))
+
+app.use(imgPathMiddleware)
 
 
 // Rotta base

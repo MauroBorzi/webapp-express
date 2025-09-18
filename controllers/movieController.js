@@ -26,11 +26,14 @@ const show = (req, res) => {
     if (err) return res.status(500).json({ error: `Errore nell'esecuzione della query: ${err}` })
     if (resultMovie.length === 0 || resultMovie[0].id === null) return res.status(404).json({ error: `Libro non trovato` })
 
+    const movie = resultMovie[0]
+    movie.image = req.imgPath + movie.image
+
     connection.query(sqlreviews, [id], (err, resultRewies) => {
       if (err) return res.status(500).json({ error: `Errore nell'esecuzione della query: ${err}` })
 
       const movieAndReviews = {
-        ...resultMovie[0],
+        ...movie,
         reviews: resultRewies
       }
 
