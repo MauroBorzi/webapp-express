@@ -10,7 +10,7 @@ const port = process.env.PORT
 const movieRouter = require("./routers/movieRouter")
 
 
-// middleware per l'utilizzo di img statiche
+// middleware per l'utilizzo di IMG 
 app.use(express.static("public"))
 
 
