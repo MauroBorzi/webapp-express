@@ -9,6 +9,8 @@ const port = process.env.PORT
 // importo utility
 const movieRouter = require("./routers/movieRouter")
 const imgPathMiddleware = require("./middlewares/imgPathMiddleware")
+const errorHandler = require(`./middlewares/errorHandler.js`)
+const notfound = require(`./middlewares/notFound.js`)
 
 
 // middleware per l'utilizzo di IMG 
@@ -16,6 +18,9 @@ app.use(express.static("public"))
 
 app.use(imgPathMiddleware)
 
+app.use(errorHandler)
+
+app.use(notfound)
 
 // Rotta base
 app.get("/", (req, res) => {
