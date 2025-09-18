@@ -6,8 +6,8 @@ const app = express()
 const port = process.env.PORT
 
 
-// Recupero il DB
-const connection = require('./data/db')
+// middleware per l'utilizzo di img statiche
+app.use(express.static("public"))
 
 
 // Rotta base

@@ -11,13 +11,13 @@ const connection = mysql.createConnection({
 })
 
 
-// Stabilisco la connesione al DB
+// Stabilisco la connessione al DB
 connection.connect((err) => {
   if (err) {
-    console.log(`Errore di connesione al DB: ${err}`)
+    console.log(`Errore di connessione al DB: ${err}`)
   }
   else {
-    console.log(`Connesione al DB avvenuta correttamente`)
+    console.log(`Connessione al DB avvenuta correttamente`)
   }
 })
 
