@@ -6,6 +6,10 @@ const app = express()
 const port = process.env.PORT
 
 
+// importo il router
+const movieRouter = require("./routers/movieRouter")
+
+
 // middleware per l'utilizzo di img statiche
 app.use(express.static("public"))
 
@@ -14,6 +18,10 @@ app.use(express.static("public"))
 app.get("/", (req, res) => {
   res.send(`Rotta base`)
 })
+
+
+// definisco le rotte per i film
+app.use("/movies", movieRouter)
 
 
 // Dico al server di rimanere in ascolto sulla porta 3000
