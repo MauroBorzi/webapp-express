@@ -8,7 +8,9 @@ const index = (req, res) => {
 
   connection.query(sql, (err, results) => {
     if (err) return res.status(500).json({ error: `Errore nell'esecuzione della query: ${err}` })
-
+    results.map(resu => {
+      resu.image = req.imgPath + resu.image
+    })
     res.send(results)
   })
 }
