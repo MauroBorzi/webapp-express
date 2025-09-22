@@ -21,7 +21,12 @@ const show = (req, res) => {
 
   const { id } = req.params
 
-  const sqlMovie = "SELECT * FROM movies WHERE id = ?"
+  const sqlMovie = `
+  SELECT M.*, ROUND(AVG(R.vote)) AS average_vote 
+  FROM movies M 
+  LEFT JOIN reviews R ON R.movie_id = M.id
+  WHERE M.id = ?`
+
   const sqlreviews = "SELECT * FROM reviews WHERE movie_id = ?"
 
   connection.query(sqlMovie, [id], (err, resultMovie) => {
@@ -30,6 +35,7 @@ const show = (req, res) => {
 
     const movie = resultMovie[0]
     movie.image = req.imgPath + movie.image
+    movie.average_vote = parseInt(movie.average_vote)
 
     connection.query(sqlreviews, [id], (err, resultRewies) => {
       if (err) return res.status(500).json({ error: `Errore nell'esecuzione della query: ${err}` })
