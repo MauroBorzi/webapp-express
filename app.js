@@ -22,6 +22,8 @@ app.use(express.static("public"))
 
 app.use(imgPathMiddleware)
 
+app.use(express.json())
+
 
 // Rotta base
 app.get("/", (req, res) => {
