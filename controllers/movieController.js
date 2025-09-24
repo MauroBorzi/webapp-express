@@ -1,5 +1,6 @@
 // Recupero la connessione al DB
 const connection = require('../data/db')
+const { connect } = require('../routers/movieRouter')
 
 
 // index
@@ -51,6 +52,28 @@ const show = (req, res) => {
 }
 
 
+// store
+const store = (req, res) => {
+
+  const { title, director, genre, release_year, abstract } = req.body
+
+  const fileName = `${req.file.filename}`
+
+  const query = "INSERT INTO movies (title, director, genre, release_year, abstract, image) VALUES (?, ?, ?, ?, ?, ?)"
+
+  connection.query(query, [title, director, genre, release_year, abstract, fileName], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "Errore nell'inserimento" })
+    }
+
+    res.status(201).json({
+      result: true,
+      message: "Inserimwnto avvenuto con successo"
+    })
+  })
+}
+
+
 // store review
 const storeReview = (req, res) => {
 
@@ -73,5 +96,6 @@ const storeReview = (req, res) => {
 module.exports = {
   index,
   show,
+  store,
   storeReview
 }
